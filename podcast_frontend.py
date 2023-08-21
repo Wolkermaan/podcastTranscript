@@ -4,7 +4,7 @@ import json
 import os
 
 def main():
-    st.title("Newsletter Dashboard")
+    st.title("Podcast Summary Dashboard")
 
     available_podcast_info = create_dict_from_json_files('.')
 
@@ -20,7 +20,7 @@ def main():
         podcast_info = available_podcast_info[selected_podcast]
 
         # Right section - Newsletter content
-        st.header("Newsletter Content")
+        st.header("Summary Content")
 
         # Display the podcast title
         st.subheader("Episode Title")
@@ -41,7 +41,7 @@ def main():
         col3, col4 = st.columns([3, 7])
 
         with col3:
-            st.subheader("Podcast Guest")
+            st.subheader("Podcast Guest for this Episode")
             st.write(podcast_info['podcast_guest']['name'])
 
         with col4:
@@ -49,18 +49,18 @@ def main():
             st.write(podcast_info["podcast_guest"]['summary'])
 
         # Display the five key moments
-        st.subheader("Key Moments")
+        st.subheader("Key Takeaways")
         key_moments = podcast_info['podcast_highlights']
         for moment in key_moments.split('\n'):
             st.markdown(
                 f"<p style='margin-bottom: 5px;'>{moment}</p>", unsafe_allow_html=True)
 
     # User Input box
-    st.sidebar.subheader("Add and Process New Podcast Feed")
+    st.sidebar.subheader("Add a New Podcast Feed for processing")
     url = st.sidebar.text_input("Link to RSS Feed")
 
     process_button = st.sidebar.button("Process Podcast Feed")
-    st.sidebar.markdown("**Note**: Podcast processing can take upto 5 mins, please be patient.")
+    st.sidebar.markdown("**Note**: Podcast processing can take upto 5 mins, chill.")
 
     if process_button:
 
@@ -68,7 +68,7 @@ def main():
         podcast_info = process_podcast_info(url)
 
         # Right section - Newsletter content
-        st.header("Newsletter Content")
+        st.header("Summary Content")
 
         # Display the podcast title
         st.subheader("Episode Title")
